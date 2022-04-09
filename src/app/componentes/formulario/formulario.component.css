@@ -1,0 +1,14 @@
+.form-div {
+  max-width: 500px;
+  animation: aparecer 1s forwards;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+  }
+}

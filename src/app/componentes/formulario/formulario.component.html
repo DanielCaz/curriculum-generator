@@ -1,0 +1,101 @@
+<div class="form-div container p-3">
+  <form (ngSubmit)="onSubmit()" class="bg-white p-3 rounded">
+    <div class="row mb-3">
+      <div class="col">
+        <label for="inputNombre">Nombre</label>
+        <input
+          id="inputNombre"
+          name="nombre"
+          [(ngModel)]="curriculum.nombre"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <div class="col">
+        <label for="inputApellido">Apellido</label>
+        <input
+          id="inputApellido"
+          name="apellido"
+          [(ngModel)]="curriculum.apellido"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <label for="inputEmail">Email</label>
+        <input
+          type="email"
+          id="inputEmail"
+          name="email"
+          [(ngModel)]="curriculum.email"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <label>Habilidades</label>
+          <button
+            type="button"
+            class="btn btn-primary ms-auto"
+            (click)="agregarHabilidad()"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger ms-3"
+            (click)="removerHabilidad()"
+          >
+            -
+          </button>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="inputHabilidad">Habilidad</label>
+            <input
+              id="inputHabilidad"
+              type="text"
+              name="habilidad"
+              class="form-control"
+              [(ngModel)]="nuevaHabilidad.nombre"
+            />
+          </div>
+          <div class="col">
+            <label for="inputPorcentaje">Porcentaje</label>
+            <input
+              id="inputPorcentaje"
+              type="number"
+              name="porcentaje"
+              class="form-control"
+              [(ngModel)]="nuevaHabilidad.porcentaje"
+              min="0"
+              max="100"
+            />
+          </div>
+        </div>
+        <ul class="list-group mt-2">
+          <li
+            *ngFor="let habilidad of curriculum.habilidades; let i = index"
+            class="list-group-item"
+          >
+            {{ habilidad.nombre }} - {{ habilidad.porcentaje }}%
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-flex justify-content-center m-1">
+        <button type="button" class="btn btn-secondary">
+          <a routerLink="/" class="text-white text-decoration-none">Regresar</a>
+        </button>
+      </div>
+      <div class="col d-flex justify-content-center m-1">
+        <button type="submit" class="btn btn-primary">Finalizar</button>
+      </div>
+    </div>
+  </form>
+</div>

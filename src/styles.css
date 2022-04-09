@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background: linear-gradient(108.06deg, #26cbff 4.02%, #ee2cff 95.29%);
-  height: 100vh;
+  background: linear-gradient(120deg, #26cbff 4.02%, #ee2cff 95.29%);
+  min-height: 100vh;
 }
