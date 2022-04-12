@@ -9,7 +9,12 @@ import { PrincipalComponent } from './componentes/principal/principal.component'
 import { CurriculumComponent } from './componentes/curriculum/curriculum.component';
 
 @NgModule({
-  declarations: [AppComponent, FormularioComponent, PrincipalComponent, CurriculumComponent],
+  declarations: [
+    AppComponent,
+    FormularioComponent,
+    PrincipalComponent,
+    CurriculumComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

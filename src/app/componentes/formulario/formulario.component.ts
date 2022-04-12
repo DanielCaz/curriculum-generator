@@ -9,17 +9,7 @@ import { CurriculumService } from '../../servicios/curriculum.service';
   styleUrls: ['./formulario.component.css'],
 })
 export class FormularioComponent implements OnInit {
-  curriculum: Curriculum = {
-    nombre: '',
-    apellido: '',
-    email: '',
-    habilidades: [],
-  };
-
-  nuevaHabilidad = {
-    nombre: '',
-    porcentaje: 0,
-  };
+  nuevo: Curriculum = this.curriculumService.getCurriculum;
 
   constructor(
     private curriculumService: CurriculumService,
@@ -29,37 +19,135 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    if (
-      this.noEstaEnBlanco(this.curriculum.nombre) &&
-      this.noEstaEnBlanco(this.curriculum.apellido) &&
-      this.noEstaEnBlanco(this.curriculum.email) &&
-      this.curriculum.habilidades.length > 0
-    ) {
-      this.curriculumService.setCurriculum(this.curriculum);
-      this.router.navigateByUrl('/curriculum');
-    } else {
-      alert('Información insuficiente');
-    }
+    this.curriculumService.setCurriculum(this.nuevo);
+    this.router.navigateByUrl('/curriculum');
+  }
+
+  //* Agregar
+  agregarEmail() {
+    this.nuevo.datosPersonales.emails.push({ direccion: '' });
+  }
+
+  agregarTelefono() {
+    this.nuevo.datosPersonales.telefonos.push({ numero: '' });
   }
 
   agregarHabilidad() {
-    if (
-      this.noEstaEnBlanco(this.nuevaHabilidad.nombre) &&
-      this.nuevaHabilidad.porcentaje >= 0 &&
-      this.nuevaHabilidad.porcentaje <= 100
-    ) {
-      this.curriculum.habilidades.push(this.nuevaHabilidad);
-      this.nuevaHabilidad = { nombre: '', porcentaje: 0 };
-    }
+    this.nuevo.habilidades.push({ nombre: '', porcentaje: 0 });
+  }
+
+  agregarFormacion() {
+    this.nuevo.formacionAcademica.push({
+      grado: '',
+      institucion: '',
+      fechaInicio: '',
+      fechaFin: '',
+    });
+  }
+
+  agregarExperiencia() {
+    this.nuevo.experienciaLaboral.push({
+      puesto: '',
+      empresa: '',
+      responsabilidades: [{ nombre: '' }],
+      fechaInicio: '',
+      fechaFin: '',
+    });
+  }
+
+  agregarResponsabilidad(i: number) {
+    this.nuevo.experienciaLaboral[i].responsabilidades.push({ nombre: '' });
+  }
+
+  //* Remover
+  removerEmail() {
+    this.nuevo.datosPersonales.emails.pop();
+  }
+
+  removerTelefono() {
+    this.nuevo.datosPersonales.telefonos.pop();
   }
 
   removerHabilidad() {
-    if (this.curriculum.habilidades.length > 0) {
-      this.curriculum.habilidades.pop();
-    }
+    this.nuevo.habilidades.pop();
   }
 
-  private noEstaEnBlanco(texto: string): boolean {
-    return texto.split(' ').join('').length > 0;
+  removerFormacion() {
+    this.nuevo.formacionAcademica.pop();
+  }
+
+  removerExperiencia() {
+    this.nuevo.experienciaLaboral.pop();
+  }
+
+  removerResponsabilidad(i: number) {
+    this.nuevo.experienciaLaboral[i].responsabilidades.pop();
+  }
+
+  //* Eventos
+  alEscribirEmail(i: number, email: string) {
+    this.nuevo.datosPersonales.emails[i].direccion = email;
+  }
+
+  alEscribirTelefono(i: number, telefono: string) {
+    this.nuevo.datosPersonales.telefonos[i].numero = telefono;
+  }
+
+  alEscribirHabilidadNombre(i: number, nombre: string) {
+    this.nuevo.habilidades[i].nombre = nombre;
+  }
+
+  alEscribirHabilidadPorcentaje(i: number, porcentaje: number) {
+    this.nuevo.habilidades[i].porcentaje = porcentaje;
+  }
+
+  alEscribirFormacionGrado(i: number, grado: string) {
+    this.nuevo.formacionAcademica[i].grado = grado;
+  }
+
+  alEscribirFormacionInstitucion(i: number, institucion: string) {
+    this.nuevo.formacionAcademica[i].institucion = institucion;
+  }
+
+  alEscribirFormacionFechaInicio(i: number, fecha: Date) {
+    this.nuevo.formacionAcademica[i].fechaInicio = this.preparaFecha(fecha);
+  }
+
+  alEscribirFormacionFechaFin(i: number, fecha: Date) {
+    this.nuevo.formacionAcademica[i].fechaFin = this.preparaFecha(fecha);
+  }
+
+  alEscribirExperienciaPuesto(i: number, puesto: string) {
+    this.nuevo.experienciaLaboral[i].puesto = puesto;
+  }
+
+  alEscribirExperienciaEmpresa(i: number, empresa: string) {
+    this.nuevo.experienciaLaboral[i].empresa = empresa;
+  }
+
+  alEscribirExperienciaFechaInicio(i: number, fecha: Date) {
+    this.nuevo.experienciaLaboral[i].fechaInicio = this.preparaFecha(fecha);
+  }
+
+  alEscribirExperienciaFechaFin(i: number, fecha: Date) {
+    this.nuevo.experienciaLaboral[i].fechaFin = this.preparaFecha(fecha);
+  }
+
+  alEscribirExperienciaResponsabilidad(
+    i: number,
+    j: number,
+    responsabilidad: string
+  ) {
+    this.nuevo.experienciaLaboral[i].responsabilidades[j].nombre =
+      responsabilidad;
+  }
+
+  //* Otras
+  preparaFecha(fecha: Date): string {
+    const dia = fecha.getDay() < 10 ? `0${fecha.getDay()}` : fecha.getDay();
+    const mes =
+      fecha.getMonth() < 10 ? `0${fecha.getMonth()}` : fecha.getMonth();
+
+    return `${dia}/${mes}/${fecha.getFullYear()}`;
   }
 }

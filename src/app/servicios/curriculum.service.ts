@@ -6,10 +6,26 @@ import { Curriculum } from 'src/app/Curriculum';
 })
 export class CurriculumService {
   curriculum: Curriculum = {
-    nombre: '',
-    apellido: '',
-    email: '',
-    habilidades: [],
+    datosPersonales: {
+      fotoUrl: '',
+      nombre: '',
+      apellido: '',
+      emails: [{ direccion: '' }],
+      telefonos: [{ numero: '' }],
+    },
+    formacionAcademica: [
+      { grado: '', institucion: '', fechaInicio: '', fechaFin: '' },
+    ],
+    experienciaLaboral: [
+      {
+        puesto: '',
+        empresa: '',
+        responsabilidades: [{ nombre: '' }],
+        fechaInicio: '',
+        fechaFin: '',
+      },
+    ],
+    habilidades: [{ nombre: '', porcentaje: 0 }],
   };
 
   get getCurriculum(): Curriculum {

@@ -3,3 +3,17 @@ body {
   background: linear-gradient(120deg, #26cbff 4.02%, #ee2cff 95.29%);
   min-height: 100vh;
 }
+
+.container {
+  animation: aparecer 1s forwards;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+  }
+}

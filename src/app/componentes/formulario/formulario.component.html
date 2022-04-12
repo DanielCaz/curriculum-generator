@@ -1,35 +1,31 @@
-<div class="form-div container p-3">
+<div class="container pb-4">
   <form (ngSubmit)="onSubmit()" class="bg-white p-3 rounded">
+    <h3>Datos Personales</h3>
+    <label for="inputUrl">Foto (url)</label>
+    <input
+      type="text"
+      name="inputUrl"
+      class="form-control"
+      [(ngModel)]="nuevo.datosPersonales.fotoUrl"
+    />
     <div class="row mb-3">
-      <div class="col">
+      <div class="col-sm">
         <label for="inputNombre">Nombre</label>
         <input
           id="inputNombre"
           name="nombre"
-          [(ngModel)]="curriculum.nombre"
+          [(ngModel)]="nuevo.datosPersonales.nombre"
           type="text"
           class="form-control"
         />
       </div>
-      <div class="col">
+      <div class="col-sm">
         <label for="inputApellido">Apellido</label>
         <input
           id="inputApellido"
           name="apellido"
-          [(ngModel)]="curriculum.apellido"
+          [(ngModel)]="nuevo.datosPersonales.apellido"
           type="text"
-          class="form-control"
-        />
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col">
-        <label for="inputEmail">Email</label>
-        <input
-          type="email"
-          id="inputEmail"
-          name="email"
-          [(ngModel)]="curriculum.email"
           class="form-control"
         />
       </div>
@@ -37,54 +33,326 @@
     <div class="row mb-3">
       <div class="col">
         <div class="d-flex">
-          <label>Habilidades</label>
           <button
+            *ngIf="nuevo.datosPersonales.telefonos.length > 1"
             type="button"
-            class="btn btn-primary ms-auto"
-            (click)="agregarHabilidad()"
+            class="btn btn-danger btn-sm ms-auto"
+            (click)="removerTelefono()"
           >
-            +
+            -
           </button>
           <button
             type="button"
-            class="btn btn-danger ms-3"
+            class="btn btn-primary btn-sm {{
+              nuevo.datosPersonales.telefonos.length > 1 ? 'ms-3' : 'ms-auto'
+            }}"
+            (click)="agregarTelefono()"
+          >
+            +
+          </button>
+        </div>
+        <div
+          *ngFor="
+            let telefono of nuevo.datosPersonales.telefonos;
+            let i = index
+          "
+        >
+          <label for="inputTelefono{{ i }}">Teléfono {{ i + 1 }}</label>
+          <input
+            id="inputTelefono{{ i }}"
+            type="tel"
+            name="telefono"
+            class="form-control"
+            value="{{ telefono.numero }}"
+            (keyup)="alEscribirTelefono(i, inputTelefono.value)"
+            #inputTelefono
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <button
+            *ngIf="nuevo.datosPersonales.emails.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm ms-auto"
+            (click)="removerEmail()"
+          >
+            -
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm {{
+              nuevo.datosPersonales.emails.length > 1 ? 'ms-3' : 'ms-auto'
+            }}"
+            (click)="agregarEmail()"
+          >
+            +
+          </button>
+        </div>
+        <div *ngFor="let email of nuevo.datosPersonales.emails; let i = index">
+          <label for="inputEmail{{ i }}">Email {{ i + 1 }}</label>
+          <input
+            id="inputEmail{{ i }}"
+            type="email"
+            name="email"
+            class="form-control"
+            value="{{ email.direccion }}"
+            (keyup)="alEscribirEmail(i, inputEmail.value)"
+            #inputEmail
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <h3>Formación Académica</h3>
+          <button
+            *ngIf="nuevo.formacionAcademica.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm ms-auto"
+            (click)="removerFormacion()"
+          >
+            -
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm {{
+              nuevo.formacionAcademica.length > 1 ? 'ms-3' : 'ms-auto'
+            }}"
+            (click)="agregarFormacion()"
+          >
+            +
+          </button>
+        </div>
+        <div *ngFor="let formacion of nuevo.formacionAcademica; let i = index">
+          <h4 class="my-2">Formación {{ i + 1 }}</h4>
+          <label for="inputFormacionGrado{{ i }}">Grado</label>
+          <input
+            id="inputFormacionGrado{{ i }}"
+            type="number"
+            name="grado"
+            class="form-control"
+            value="{{ formacion.grado }}"
+            (keyup)="alEscribirFormacionGrado(i, inputFormacionGrado.value)"
+            min="0"
+            #inputFormacionGrado
+          />
+          <label for="inputFormacionInstitucion{{ i }}">Institución</label>
+          <input
+            id="inputFormacionInstitucion{{ i }}"
+            type="text"
+            name="institución"
+            class="form-control"
+            value="{{ formacion.institucion }}"
+            (keyup)="
+              alEscribirFormacionInstitucion(i, inputFormacionInstituto.value)
+            "
+            min="0"
+            #inputFormacionInstituto
+          />
+          <div class="row">
+            <div class="col">
+              <label for="inputFormacionFechaInicio{{ i }}">Inicio</label>
+              <input
+                id="inputFormacionFechaInicio{{ i }}"
+                type="date"
+                name="fecha"
+                class="form-control"
+                value="{{ formacion.fechaInicio }}"
+                (change)="
+                  alEscribirFormacionFechaInicio(
+                    i,
+                    inputFormacionFechaInicio.valueAsDate!
+                  )
+                "
+                #inputFormacionFechaInicio
+              />
+            </div>
+            <div class="col">
+              <label for="inputFormacionFechaFin{{ i }}">Fin</label>
+              <input
+                id="inputFormacionFechaFin{{ i }}"
+                type="date"
+                name="fecha"
+                class="form-control"
+                value="{{ formacion.fechaFin }}"
+                (change)="
+                  alEscribirFormacionFechaFin(
+                    i,
+                    inputFormacionFechaFin.valueAsDate!
+                  )
+                "
+                #inputFormacionFechaFin
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <h3>Experiencia Laboral</h3>
+          <button
+            *ngIf="nuevo.experienciaLaboral.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm ms-auto"
+            (click)="removerExperiencia()"
+          >
+            -
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm {{
+              nuevo.experienciaLaboral.length > 1 ? 'ms-3' : 'ms-auto'
+            }}"
+            (click)="agregarExperiencia()"
+          >
+            +
+          </button>
+        </div>
+        <div
+          *ngFor="let experiencia of nuevo.experienciaLaboral; let i = index"
+        >
+          <h4 class="mt-2">Experiencia {{ i + 1 }}</h4>
+          <label for="inputExperienciaPuesto{{ i }}">Puesto</label>
+          <input
+            type="text"
+            id="inputExperienciaPuesto{{ i }}"
+            class="form-control"
+            name="puesto"
+            value="{{ experiencia.puesto }}"
+            (keyup)="
+              alEscribirExperienciaPuesto(i, inputExperienciaPuesto.value)
+            "
+            #inputExperienciaPuesto
+          />
+          <label for="inputExperienciaEmpresa{{ i }}">Empresa</label>
+          <input
+            type="text"
+            id="inputExperienciaEmpresa{{ i }}"
+            class="form-control"
+            name="empresa"
+            value="{{ experiencia.empresa }}"
+            (keyup)="
+              alEscribirExperienciaEmpresa(i, inputExperienciaEmpresa.value)
+            "
+            #inputExperienciaEmpresa
+          />
+          <div class="d-flex mt-2">
+            <button
+              *ngIf="nuevo.experienciaLaboral[i].responsabilidades.length > 1"
+              type="button"
+              class="btn btn-danger btn-sm ms-auto"
+              (click)="removerResponsabilidad(i)"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm {{
+                nuevo.experienciaLaboral[i].responsabilidades.length > 1
+                  ? 'ms-3'
+                  : 'ms-auto'
+              }}"
+              (click)="agregarResponsabilidad(i)"
+            >
+              +
+            </button>
+          </div>
+          <div
+            *ngFor="
+              let responsabilidad of nuevo.experienciaLaboral[i]
+                .responsabilidades;
+              let j = index
+            "
+          >
+            <label for="inputResponsabilidad{{ j }}"
+              >Responsabilidad {{ j + 1 }}</label
+            >
+            <input
+              id="inputResponsabilidad{{ j }}"
+              type="text"
+              name="responsabilidad"
+              class="form-control"
+              value="{{ responsabilidad.nombre }}"
+              (keyup)="
+                alEscribirExperienciaResponsabilidad(
+                  i,
+                  j,
+                  inputResponsabilidad.value
+                )
+              "
+              #inputResponsabilidad
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row mb-3">
+      <div class="col">
+        <div class="d-flex">
+          <h3>Habilidades</h3>
+          <button
+            *ngIf="nuevo.habilidades.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm ms-auto"
             (click)="removerHabilidad()"
           >
             -
           </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm {{
+              nuevo.habilidades.length > 1 ? 'ms-3' : 'ms-auto'
+            }}"
+            (click)="agregarHabilidad()"
+          >
+            +
+          </button>
         </div>
-        <div class="row">
-          <div class="col">
-            <label for="inputHabilidad">Habilidad</label>
+        <div
+          *ngFor="let habilidad of nuevo.habilidades; let i = index"
+          class="row"
+        >
+          <div class="col-sm-9">
+            <label for="inputHabilidad{{ i }}">Habilidad {{ i + 1 }}</label>
             <input
-              id="inputHabilidad"
+              id="inputHabilidad{{ i }}"
               type="text"
               name="habilidad"
               class="form-control"
-              [(ngModel)]="nuevaHabilidad.nombre"
+              value="{{ habilidad.nombre }}"
+              (keyup)="alEscribirHabilidadNombre(i, inputHabilidadNombre.value)"
+              #inputHabilidadNombre
             />
           </div>
-          <div class="col">
-            <label for="inputPorcentaje">Porcentaje</label>
+          <div class="col-sm-2">
+            <label for="inputPorcentaje{{ i }}">Porcentaje</label>
             <input
-              id="inputPorcentaje"
+              id="inputPorcentaje{{ i }}"
               type="number"
               name="porcentaje"
               class="form-control"
-              [(ngModel)]="nuevaHabilidad.porcentaje"
               min="0"
               max="100"
+              value="{{ habilidad.porcentaje }}"
+              (keyup)="
+                alEscribirHabilidadPorcentaje(
+                  i,
+                  inputHabilidadPorcentaje.valueAsNumber
+                )
+              "
+              #inputHabilidadPorcentaje
             />
           </div>
         </div>
-        <ul class="list-group mt-2">
-          <li
-            *ngFor="let habilidad of curriculum.habilidades; let i = index"
-            class="list-group-item"
-          >
-            {{ habilidad.nombre }} - {{ habilidad.porcentaje }}%
-          </li>
-        </ul>
       </div>
     </div>
     <div class="row">
