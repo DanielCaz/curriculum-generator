@@ -109,12 +109,12 @@ export class FormularioComponent implements OnInit {
     this.nuevo.formacionAcademica[i].institucion = institucion;
   }
 
-  alEscribirFormacionFechaInicio(i: number, fecha: Date) {
-    this.nuevo.formacionAcademica[i].fechaInicio = this.preparaFecha(fecha);
+  alEscribirFormacionFechaInicio(i: number, fecha: string) {
+    this.nuevo.formacionAcademica[i].fechaInicio = fecha;
   }
 
-  alEscribirFormacionFechaFin(i: number, fecha: Date) {
-    this.nuevo.formacionAcademica[i].fechaFin = this.preparaFecha(fecha);
+  alEscribirFormacionFechaFin(i: number, fecha: string) {
+    this.nuevo.formacionAcademica[i].fechaFin = fecha;
   }
 
   alEscribirExperienciaPuesto(i: number, puesto: string) {
@@ -125,12 +125,12 @@ export class FormularioComponent implements OnInit {
     this.nuevo.experienciaLaboral[i].empresa = empresa;
   }
 
-  alEscribirExperienciaFechaInicio(i: number, fecha: Date) {
-    this.nuevo.experienciaLaboral[i].fechaInicio = this.preparaFecha(fecha);
+  alEscribirExperienciaFechaInicio(i: number, fecha: string) {
+    this.nuevo.experienciaLaboral[i].fechaInicio = fecha;
   }
 
-  alEscribirExperienciaFechaFin(i: number, fecha: Date) {
-    this.nuevo.experienciaLaboral[i].fechaFin = this.preparaFecha(fecha);
+  alEscribirExperienciaFechaFin(i: number, fecha: string) {
+    this.nuevo.experienciaLaboral[i].fechaFin = fecha;
   }
 
   alEscribirExperienciaResponsabilidad(
@@ -140,14 +140,5 @@ export class FormularioComponent implements OnInit {
   ) {
     this.nuevo.experienciaLaboral[i].responsabilidades[j].nombre =
       responsabilidad;
-  }
-
-  //* Otras
-  preparaFecha(fecha: Date): string {
-    const dia = fecha.getDay() < 10 ? `0${fecha.getDay()}` : fecha.getDay();
-    const mes =
-      fecha.getMonth() < 10 ? `0${fecha.getMonth()}` : fecha.getMonth();
-
-    return `${dia}/${mes}/${fecha.getFullYear()}`;
   }
 }

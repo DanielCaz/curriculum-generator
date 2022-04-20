@@ -162,11 +162,10 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                value="{{ formacion.fechaInicio }}"
                 (change)="
                   alEscribirFormacionFechaInicio(
                     i,
-                    inputFormacionFechaInicio.valueAsDate!
+                    inputFormacionFechaInicio.value
                   )
                 "
                 #inputFormacionFechaInicio
@@ -179,12 +178,8 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                value="{{ formacion.fechaFin }}"
                 (change)="
-                  alEscribirFormacionFechaFin(
-                    i,
-                    inputFormacionFechaFin.valueAsDate!
-                  )
+                  alEscribirFormacionFechaFin(i, inputFormacionFechaFin.value)
                 "
                 #inputFormacionFechaFin
               />
@@ -290,6 +285,40 @@
               "
               #inputResponsabilidad
             />
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="inputExperienciaFechaInicio{{ i }}">Inicio</label>
+              <input
+                id="inputExperienciaFechaInicio{{ i }}"
+                type="date"
+                name="fecha"
+                class="form-control"
+                (change)="
+                  alEscribirExperienciaFechaInicio(
+                    i,
+                    inputExperienciaFechaInicio.value
+                  )
+                "
+                #inputExperienciaFechaInicio
+              />
+            </div>
+            <div class="col">
+              <label for="inputExperienciaFechaFin{{ i }}">Fin</label>
+              <input
+                id="inputExperienciaFechaFin{{ i }}"
+                type="date"
+                name="fecha"
+                class="form-control"
+                (change)="
+                  alEscribirExperienciaFechaFin(
+                    i,
+                    inputExperienciaFechaFin.value
+                  )
+                "
+                #inputExperienciaFechaFin
+              />
+            </div>
           </div>
         </div>
       </div>
