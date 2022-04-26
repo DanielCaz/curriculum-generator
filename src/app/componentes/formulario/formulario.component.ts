@@ -60,28 +60,28 @@ export class FormularioComponent implements OnInit {
   }
 
   //* Remover
-  removerEmail() {
-    this.nuevo.datosPersonales.emails.pop();
+  removerEmail(i: number) {
+    this.nuevo.datosPersonales.emails.splice(i, 1);
   }
 
-  removerTelefono() {
-    this.nuevo.datosPersonales.telefonos.pop();
+  removerTelefono(i: number) {
+    this.nuevo.datosPersonales.telefonos.splice(i, 1);
   }
 
-  removerHabilidad() {
-    this.nuevo.habilidades.pop();
+  removerHabilidad(i: number) {
+    this.nuevo.habilidades.splice(i, 1);
   }
 
-  removerFormacion() {
-    this.nuevo.formacionAcademica.pop();
+  removerFormacion(i: number) {
+    this.nuevo.formacionAcademica.splice(i, 1);
   }
 
-  removerExperiencia() {
-    this.nuevo.experienciaLaboral.pop();
+  removerExperiencia(i: number) {
+    this.nuevo.experienciaLaboral.splice(i, 1);
   }
 
-  removerResponsabilidad(i: number) {
-    this.nuevo.experienciaLaboral[i].responsabilidades.pop();
+  removerResponsabilidad(i: number, j: number) {
+    this.nuevo.experienciaLaboral[i].responsabilidades.splice(j, 1);
   }
 
   //* Eventos

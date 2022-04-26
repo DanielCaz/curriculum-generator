@@ -34,18 +34,8 @@
       <div class="col">
         <div class="d-flex">
           <button
-            *ngIf="nuevo.datosPersonales.telefonos.length > 1"
             type="button"
-            class="btn btn-danger btn-sm ms-auto"
-            (click)="removerTelefono()"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm {{
-              nuevo.datosPersonales.telefonos.length > 1 ? 'ms-3' : 'ms-auto'
-            }}"
+            class="btn btn-primary btn-sm ms-auto"
             (click)="agregarTelefono()"
           >
             +
@@ -58,6 +48,14 @@
           "
         >
           <label for="inputTelefono{{ i }}">Teléfono {{ i + 1 }}</label>
+          <button
+            *ngIf="nuevo.datosPersonales.telefonos.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm mx-2 mb-1"
+            (click)="removerTelefono(i)"
+          >
+            -
+          </button>
           <input
             id="inputTelefono{{ i }}"
             type="tel"
@@ -74,25 +72,23 @@
       <div class="col">
         <div class="d-flex">
           <button
-            *ngIf="nuevo.datosPersonales.emails.length > 1"
             type="button"
-            class="btn btn-danger btn-sm ms-auto"
-            (click)="removerEmail()"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm {{
-              nuevo.datosPersonales.emails.length > 1 ? 'ms-3' : 'ms-auto'
-            }}"
+            class="btn btn-primary btn-sm ms-auto"
             (click)="agregarEmail()"
           >
             +
           </button>
         </div>
         <div *ngFor="let email of nuevo.datosPersonales.emails; let i = index">
-          <label for="inputEmail{{ i }}">Email {{ i + 1 }}</label>
+          <label for="inputEmail{{ i }}">Email {{ i + 1 }}</label
+          ><button
+            *ngIf="nuevo.datosPersonales.emails.length > 1"
+            type="button"
+            class="btn btn-danger btn-sm mx-2 mb-1"
+            (click)="removerEmail(i)"
+          >
+            -
+          </button>
           <input
             id="inputEmail{{ i }}"
             type="email"
@@ -111,25 +107,25 @@
         <div class="d-flex">
           <h3>Formación Académica</h3>
           <button
-            *ngIf="nuevo.formacionAcademica.length > 1"
             type="button"
-            class="btn btn-danger btn-sm ms-auto"
-            (click)="removerFormacion()"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm {{
-              nuevo.formacionAcademica.length > 1 ? 'ms-3' : 'ms-auto'
-            }}"
+            class="btn btn-primary btn-sm ms-auto"
             (click)="agregarFormacion()"
           >
             +
           </button>
         </div>
         <div *ngFor="let formacion of nuevo.formacionAcademica; let i = index">
-          <h4 class="my-2">Formación {{ i + 1 }}</h4>
+          <div class="d-flex">
+            <h4 class="my-2">Formación {{ i + 1 }}</h4>
+            <button
+              *ngIf="nuevo.formacionAcademica.length > 1"
+              type="button"
+              class="btn btn-danger btn-sm mx-2 mb-1"
+              (click)="removerFormacion(i)"
+            >
+              -
+            </button>
+          </div>
           <label for="inputFormacionGrado{{ i }}">Grado</label>
           <input
             id="inputFormacionGrado{{ i }}"
@@ -194,18 +190,8 @@
         <div class="d-flex">
           <h3>Experiencia Laboral</h3>
           <button
-            *ngIf="nuevo.experienciaLaboral.length > 1"
             type="button"
-            class="btn btn-danger btn-sm ms-auto"
-            (click)="removerExperiencia()"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm {{
-              nuevo.experienciaLaboral.length > 1 ? 'ms-3' : 'ms-auto'
-            }}"
+            class="btn btn-primary btn-sm ms-auto"
             (click)="agregarExperiencia()"
           >
             +
@@ -214,7 +200,17 @@
         <div
           *ngFor="let experiencia of nuevo.experienciaLaboral; let i = index"
         >
-          <h4 class="mt-2">Experiencia {{ i + 1 }}</h4>
+          <div class="d-flex">
+            <h4 class="mt-2">Experiencia {{ i + 1 }}</h4>
+            <button
+              *ngIf="nuevo.experienciaLaboral.length > 1"
+              type="button"
+              class="btn btn-danger btn-sm mx-2 mb-1"
+              (click)="removerExperiencia(i)"
+            >
+              -
+            </button>
+          </div>
           <label for="inputExperienciaPuesto{{ i }}">Puesto</label>
           <input
             type="text"
@@ -241,20 +237,8 @@
           />
           <div class="d-flex mt-2">
             <button
-              *ngIf="nuevo.experienciaLaboral[i].responsabilidades.length > 1"
               type="button"
-              class="btn btn-danger btn-sm ms-auto"
-              (click)="removerResponsabilidad(i)"
-            >
-              -
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary btn-sm {{
-                nuevo.experienciaLaboral[i].responsabilidades.length > 1
-                  ? 'ms-3'
-                  : 'ms-auto'
-              }}"
+              class="btn btn-primary btn-sm ms-auto"
               (click)="agregarResponsabilidad(i)"
             >
               +
@@ -270,6 +254,14 @@
             <label for="inputResponsabilidad{{ j }}"
               >Responsabilidad {{ j + 1 }}</label
             >
+            <button
+              *ngIf="nuevo.experienciaLaboral[i].responsabilidades.length > 1"
+              type="button"
+              class="btn btn-danger btn-sm mx-2 mb-1"
+              (click)="removerResponsabilidad(i, j)"
+            >
+              -
+            </button>
             <input
               id="inputResponsabilidad{{ j }}"
               type="text"
@@ -329,18 +321,8 @@
         <div class="d-flex">
           <h3>Habilidades</h3>
           <button
-            *ngIf="nuevo.habilidades.length > 1"
             type="button"
-            class="btn btn-danger btn-sm ms-auto"
-            (click)="removerHabilidad()"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary btn-sm {{
-              nuevo.habilidades.length > 1 ? 'ms-3' : 'ms-auto'
-            }}"
+            class="btn btn-primary btn-sm ms-auto"
             (click)="agregarHabilidad()"
           >
             +
@@ -351,7 +333,15 @@
           class="row"
         >
           <div class="col-sm-9">
-            <label for="inputHabilidad{{ i }}">Habilidad {{ i + 1 }}</label>
+            <label for="inputHabilidad{{ i }}">Habilidad {{ i + 1 }}</label
+            ><button
+              *ngIf="nuevo.habilidades.length > 1"
+              type="button"
+              class="btn btn-danger btn-sm mx-2 mb-1"
+              (click)="removerHabilidad(i)"
+            >
+              -
+            </button>
             <input
               id="inputHabilidad{{ i }}"
               type="text"
