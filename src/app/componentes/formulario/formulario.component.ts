@@ -19,8 +19,23 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.curriculumService.setCurriculum(this.nuevo);
-    this.router.navigateByUrl('/curriculum');
+    var valido = true;
+    this.nuevo.formacionAcademica.forEach((formacion) => {
+      if (!formacion.fechaInicio || !formacion.fechaFin) {
+        alert('Falta llenar fechas de la formación académica');
+        valido = false;
+      }
+    });
+    this.nuevo.experienciaLaboral.forEach((experiencia) => {
+      if (!experiencia.fechaInicio || !experiencia.fechaFin) {
+        alert('Falta llenar fechas de la experiencia laboral');
+        valido = false;
+      }
+    });
+    if (valido) {
+      this.curriculumService.setCurriculum(this.nuevo);
+      this.router.navigateByUrl('/curriculum');
+    }
   }
 
   //* Agregar
@@ -82,5 +97,36 @@ export class FormularioComponent implements OnInit {
 
   removerResponsabilidad(i: number, j: number) {
     this.nuevo.experienciaLaboral[i].responsabilidades.splice(j, 1);
+  }
+
+  //* Datos de prueba
+  insertarDatosDePrueba() {
+    this.nuevo = {
+      datosPersonales: {
+        fotoUrl: 'https://i.ibb.co/HxcPDpZ/Profile.jpg',
+        nombre: 'Jorge Daniel',
+        apellido: 'Cazarez Hernandez',
+        emails: [{ direccion: 'cazarez.jorge.prog2019@gmail.com' }],
+        telefonos: [{ numero: '3511358429' }],
+      },
+      formacionAcademica: [
+        {
+          grado: 'Superior',
+          institucion: 'ITESZ',
+          fechaInicio: '',
+          fechaFin: '',
+        },
+      ],
+      experienciaLaboral: [
+        {
+          puesto: 'Vendedor',
+          empresa: 'Ventas Inc.',
+          responsabilidades: [{ nombre: 'Vender' }],
+          fechaInicio: '',
+          fechaFin: '',
+        },
+      ],
+      habilidades: [{ nombre: 'Diseñar', porcentaje: 3 }],
+    };
   }
 }

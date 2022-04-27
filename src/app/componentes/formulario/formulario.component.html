@@ -1,6 +1,15 @@
 <div class="container py-4">
   <form (ngSubmit)="onSubmit()" class="bg-white p-3 rounded">
-    <h3>Datos Personales</h3>
+    <div class="d-flex">
+      <h3 class="me-2">Datos Personales</h3>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="insertarDatosDePrueba()"
+      >
+        Insertar datos de muestra
+      </button>
+    </div>
     <label for="inputUrl">Foto (url)</label>
     <input
       type="text"
