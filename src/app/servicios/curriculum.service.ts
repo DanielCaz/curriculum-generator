@@ -14,7 +14,12 @@ export class CurriculumService {
       telefonos: [{ numero: '' }],
     },
     formacionAcademica: [
-      { grado: '', institucion: '', fechaInicio: '', fechaFin: '' },
+      {
+        grado: '',
+        institucion: '',
+        fechaInicio: '',
+        fechaFin: '',
+      },
     ],
     experienciaLaboral: [
       {

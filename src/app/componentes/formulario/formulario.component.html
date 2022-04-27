@@ -61,9 +61,7 @@
             type="tel"
             name="telefono"
             class="form-control"
-            value="{{ telefono.numero }}"
-            (keyup)="alEscribirTelefono(i, inputTelefono.value)"
-            #inputTelefono
+            [(ngModel)]="nuevo.datosPersonales.telefonos[i].numero"
           />
         </div>
       </div>
@@ -94,9 +92,7 @@
             type="email"
             name="email"
             class="form-control"
-            value="{{ email.direccion }}"
-            (keyup)="alEscribirEmail(i, inputEmail.value)"
-            #inputEmail
+            [(ngModel)]="nuevo.datosPersonales.emails[i].direccion"
           />
         </div>
       </div>
@@ -132,10 +128,8 @@
             type="text"
             name="grado"
             class="form-control"
-            value="{{ formacion.grado }}"
-            (keyup)="alEscribirFormacionGrado(i, inputFormacionGrado.value)"
             min="0"
-            #inputFormacionGrado
+            [(ngModel)]="nuevo.formacionAcademica[i].grado"
           />
           <label for="inputFormacionInstitucion{{ i }}">Institución</label>
           <input
@@ -143,12 +137,8 @@
             type="text"
             name="institución"
             class="form-control"
-            value="{{ formacion.institucion }}"
-            (keyup)="
-              alEscribirFormacionInstitucion(i, inputFormacionInstituto.value)
-            "
             min="0"
-            #inputFormacionInstituto
+            [(ngModel)]="nuevo.formacionAcademica[i].institucion"
           />
           <div class="row">
             <div class="col">
@@ -158,13 +148,7 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                (change)="
-                  alEscribirFormacionFechaInicio(
-                    i,
-                    inputFormacionFechaInicio.value
-                  )
-                "
-                #inputFormacionFechaInicio
+                [(ngModel)]="nuevo.formacionAcademica[i].fechaInicio"
               />
             </div>
             <div class="col">
@@ -174,10 +158,7 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                (change)="
-                  alEscribirFormacionFechaFin(i, inputFormacionFechaFin.value)
-                "
-                #inputFormacionFechaFin
+                [(ngModel)]="nuevo.formacionAcademica[i].fechaFin"
               />
             </div>
           </div>
@@ -217,11 +198,7 @@
             id="inputExperienciaPuesto{{ i }}"
             class="form-control"
             name="puesto"
-            value="{{ experiencia.puesto }}"
-            (keyup)="
-              alEscribirExperienciaPuesto(i, inputExperienciaPuesto.value)
-            "
-            #inputExperienciaPuesto
+            [(ngModel)]="nuevo.experienciaLaboral[i].puesto"
           />
           <label for="inputExperienciaEmpresa{{ i }}">Empresa</label>
           <input
@@ -229,11 +206,7 @@
             id="inputExperienciaEmpresa{{ i }}"
             class="form-control"
             name="empresa"
-            value="{{ experiencia.empresa }}"
-            (keyup)="
-              alEscribirExperienciaEmpresa(i, inputExperienciaEmpresa.value)
-            "
-            #inputExperienciaEmpresa
+            [(ngModel)]="nuevo.experienciaLaboral[i].empresa"
           />
           <div class="d-flex mt-2">
             <button
@@ -267,15 +240,9 @@
               type="text"
               name="responsabilidad"
               class="form-control"
-              value="{{ responsabilidad.nombre }}"
-              (keyup)="
-                alEscribirExperienciaResponsabilidad(
-                  i,
-                  j,
-                  inputResponsabilidad.value
-                )
+              [(ngModel)]="
+                nuevo.experienciaLaboral[i].responsabilidades[j].nombre
               "
-              #inputResponsabilidad
             />
           </div>
           <div class="row">
@@ -286,13 +253,7 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                (change)="
-                  alEscribirExperienciaFechaInicio(
-                    i,
-                    inputExperienciaFechaInicio.value
-                  )
-                "
-                #inputExperienciaFechaInicio
+                [(ngModel)]="nuevo.experienciaLaboral[i].fechaInicio"
               />
             </div>
             <div class="col">
@@ -302,13 +263,7 @@
                 type="date"
                 name="fecha"
                 class="form-control"
-                (change)="
-                  alEscribirExperienciaFechaFin(
-                    i,
-                    inputExperienciaFechaFin.value
-                  )
-                "
-                #inputExperienciaFechaFin
+                [(ngModel)]="nuevo.experienciaLaboral[i].fechaFin"
               />
             </div>
           </div>
@@ -347,9 +302,7 @@
               type="text"
               name="habilidad"
               class="form-control"
-              value="{{ habilidad.nombre }}"
-              (keyup)="alEscribirHabilidadNombre(i, inputHabilidadNombre.value)"
-              #inputHabilidadNombre
+              [(ngModel)]="nuevo.habilidades[i].nombre"
             />
           </div>
           <div class="col-sm-2">
@@ -361,14 +314,7 @@
               class="form-control"
               min="0"
               max="100"
-              value="{{ habilidad.porcentaje }}"
-              (keyup)="
-                alEscribirHabilidadPorcentaje(
-                  i,
-                  inputHabilidadPorcentaje.valueAsNumber
-                )
-              "
-              #inputHabilidadPorcentaje
+              [(ngModel)]="nuevo.habilidades[i].porcentaje"
             />
           </div>
         </div>
