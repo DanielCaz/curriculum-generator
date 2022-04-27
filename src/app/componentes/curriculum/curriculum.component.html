@@ -1,87 +1,92 @@
-<div class="container bg-white mb-4 rounded">
-  <div class="d-flex p-4 justify-content-center">
-    <img
-      src="{{ datos.datosPersonales.fotoUrl }}"
-      class="rounded-circle"
-      alt="Profile"
-      width="150"
-    />
-  </div>
-  <h2 class="text-center">
-    {{ datos.datosPersonales.nombre }} {{ datos.datosPersonales.apellido }}
-  </h2>
-  <hr />
-  <div class="row">
-    <div class="col">
-      <div class="row">
-        <div class="col-sm">
-          <h4>Teléfonos</h4>
-          <ul class="list-group list-group-flush">
-            <li
-              *ngFor="let telefono of datos.datosPersonales.telefonos"
-              class="list-group-item"
-            >
-              {{ telefono.numero }}
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm">
-          <h4>Emails</h4>
-          <ul class="list-group list-group-flush">
-            <li
-              *ngFor="let email of datos.datosPersonales.emails"
-              class="list-group-item"
-            >
-              {{ email.direccion }}
-            </li>
-          </ul>
+<div class="py-4">
+  <div class="container bg-white rounded">
+    <div class="d-flex p-4 justify-content-center">
+      <img
+        src="{{ datos.datosPersonales.fotoUrl }}"
+        class="rounded-circle"
+        alt="Profile"
+        width="150"
+      />
+    </div>
+    <h2 class="text-center">
+      {{ datos.datosPersonales.nombre }} {{ datos.datosPersonales.apellido }}
+    </h2>
+    <hr />
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col-sm">
+            <h4>Teléfonos</h4>
+            <ul class="list-group list-group-flush">
+              <li
+                *ngFor="let telefono of datos.datosPersonales.telefonos"
+                class="list-group-item"
+              >
+                {{ telefono.numero }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm">
+            <h4>Emails</h4>
+            <ul class="list-group list-group-flush">
+              <li
+                *ngFor="let email of datos.datosPersonales.emails"
+                class="list-group-item"
+              >
+                {{ email.direccion }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md">
-      <h3>Información de contacto</h3>
-      <h3>Formación académica</h3>
-      <ul class="list-group list-group-flush">
-        <li
-          *ngFor="let formacion of datos.formacionAcademica"
-          class="list-group-item"
-        >
-          <h4>{{ formacion.institucion }}</h4>
-          {{ formacion.grado }} <br />
-          {{ formacion.fechaInicio }} - {{ formacion.fechaFin }}
-        </li>
-      </ul>
-      <h3>Experiencia Laboral</h3>
-      <ul class="list-group list-group-flush">
-        <li
-          *ngFor="let experiencia of datos.experienciaLaboral; let i = index"
-          class="list-group-item"
-        >
-          <h4>{{ experiencia.empresa }}</h4>
-          {{ experiencia.puesto }} <br />
-          Responsabilidades:
-          <ul>
-            <li
-              *ngFor="
-                let responsabilidad of datos.experienciaLaboral[i]
-                  .responsabilidades
-              "
-            >
-              {{ responsabilidad.nombre }}
-            </li>
-          </ul>
-          {{ experiencia.fechaInicio }} - {{ experiencia.fechaFin }}
-        </li>
-      </ul>
-      <h3>Habilidades</h3>
-      <ul class="list-group list-group-flush">
-        <li *ngFor="let habilidad of datos.habilidades" class="list-group-item">
-          <div class="row">
-            <div class="col">{{ habilidad.nombre }}</div>
-            <div class="col">{{ habilidad.porcentaje }}%</div>
-          </div>
-        </li>
-      </ul>
+      <div class="col-md">
+        <h3>Información de contacto</h3>
+        <h3>Formación académica</h3>
+        <ul class="list-group list-group-flush">
+          <li
+            *ngFor="let formacion of datos.formacionAcademica"
+            class="list-group-item"
+          >
+            <h4>{{ formacion.institucion }}</h4>
+            {{ formacion.grado }} <br />
+            {{ formacion.fechaInicio }} - {{ formacion.fechaFin }}
+          </li>
+        </ul>
+        <h3>Experiencia Laboral</h3>
+        <ul class="list-group list-group-flush">
+          <li
+            *ngFor="let experiencia of datos.experienciaLaboral; let i = index"
+            class="list-group-item"
+          >
+            <h4>{{ experiencia.empresa }}</h4>
+            {{ experiencia.puesto }} <br />
+            Responsabilidades:
+            <ul>
+              <li
+                *ngFor="
+                  let responsabilidad of datos.experienciaLaboral[i]
+                    .responsabilidades
+                "
+              >
+                {{ responsabilidad.nombre }}
+              </li>
+            </ul>
+            {{ experiencia.fechaInicio }} - {{ experiencia.fechaFin }}
+          </li>
+        </ul>
+        <h3>Habilidades</h3>
+        <ul class="list-group list-group-flush">
+          <li
+            *ngFor="let habilidad of datos.habilidades"
+            class="list-group-item"
+          >
+            <div class="row">
+              <div class="col">{{ habilidad.nombre }}</div>
+              <div class="col">{{ habilidad.porcentaje }}%</div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
